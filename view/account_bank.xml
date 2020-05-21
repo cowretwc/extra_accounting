@@ -1,0 +1,22 @@
+<odoo>
+    
+    <record id="inherit_account_bank_statment" model="ir.ui.view">
+        <field name="name">inherit.account.bank.statment</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_tree"/>
+        <field name="arch" type="xml">
+            <field name="balance_start" position="attributes">
+                <attribute name="sum">Starting Balance</attribute>
+                <attribute name="string">Starting Balance</attribute>
+                <attribute name="widget">monetary</attribute>
+            </field>
+            <field name="balance_end_real" position="attributes">
+                <attribute name="sum">Ending Balance</attribute>
+                <attribute name="string">Ending Balance</attribute>
+                <attribute name="widget">monetary</attribute>
+            </field>
+        </field>
+
+    </record>
+
+</odoo>

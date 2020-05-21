@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- RED Color On Invoice -->
+    
+    <record id="inherit_view_account_payment_tree" model="ir.ui.view">
+        <field name="name">inherit.account.payment.tree</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">isrefunds==True</attribute>
+            </xpath>
+            <field name="amount" position="after">
+                <field name="fake_amount" invisible="1"/>
+                <field name="isrefunds" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

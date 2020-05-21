@@ -1,0 +1,48 @@
+<odoo>
+    <record id="product.product_template_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <record id="view_account_payments_internal_transfer" model="ir.ui.view">
+        <field name="name">account.supplier.payment.tree</field>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state=='draft'" decoration-muted="state=='reconciled'" edit="false" create="false">
+                <field name="payment_date"/>
+                <field name="name"/>
+                <field name="communication" string="Memo"/>
+                <field name="journal_id"/>
+                <field name="destination_journal_id"/>
+                <field name="payment_method_id"/>
+                <field name="amount" sum="Amount"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="partner_type" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_account_payments_internal_transfer" model="ir.actions.act_window">
+        <field name="name">Payments</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="context">{'default_payment_type': 'transfer'}</field>
+        <field name="domain">[('payment_type', '=', 'transfer')]</field>
+        <field name="view_id" ref="view_account_payments_internal_transfer"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                  Click to register a payment
+            </p>
+            <p>
+                Payments are used to register liquidity movements (send, collect or transfer money).
+                You can then process those payments by your own means or by using installed facilities.
+            </p>
+        </field>
+    </record>
+
+    <!-- menuitems -->
+    <menuitem id="accounting_internal_transfer" name="Internal Transfer" parent="account.menu_finance_entries" action="action_account_payments_internal_transfer" />
+
+</odoo>
