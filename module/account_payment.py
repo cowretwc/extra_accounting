@@ -64,7 +64,7 @@ class InheritPayment(models.Model):
                 (transfer_credit_aml + transfer_debit_aml).reconcile()
 
             # Set is refund or not
-            if rec.invoice_ids[0].type in ['out_refund','in_refund']:
+            if rec.invoice_ids.type in ['out_refund','in_refund']:
                 rec.write({'isrefunds':True})
 
             rec.write({'state': 'posted', 'move_name': move.name})
